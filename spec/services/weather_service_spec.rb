@@ -106,4 +106,40 @@ RSpec.describe WeatherService do
       end
     end
   end
+
+  describe 'sad path' do
+    it 'returns a 400 error response if no latitude exists' do
+      VCR.use_cassette('forecast_with_no_latitude') do
+        location = 'Denver, CO'
+        mapquest_data = MapquestService.find_location(location)
+        latitude = ''
+        longitude = mapquest_data[:results].first[:locations].first[:latLng][:lng]
+
+        data = WeatherService.find_forecast_for_location(latitude, longitude)
+
+        expect(data).to be_a(Hash)
+        expect(data).to have_key(:cod)
+        expect(data[:cod]).to eq("400")
+        expect(data).to have_key(:message)
+        expect(data[:message]).to eq("Nothing to geocode")
+      end
+    end
+
+    it 'returns a 400 error response if no longitude exists' do
+      VCR.use_cassette('forecast_with_no_longitude') do
+        location = 'Denver, CO'
+        mapquest_data = MapquestService.find_location(location)
+        latitude = mapquest_data[:results].first[:locations].first[:latLng][:lat]
+        longitude = ''
+
+        data = WeatherService.find_forecast_for_location(latitude, longitude)
+
+        expect(data).to be_a(Hash)
+        expect(data).to have_key(:cod)
+        expect(data[:cod]).to eq("400")
+        expect(data).to have_key(:message)
+        expect(data[:message]).to eq("Nothing to geocode")
+      end
+    end
+  end
 end
