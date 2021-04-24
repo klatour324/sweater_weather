@@ -22,5 +22,21 @@ RSpec.describe MapquestService do
         end
       end
     end
+
+    describe 'sad path' do
+      it 'returns a 400 error response if the location does not exist' do
+        VCR.use_cassette('mapquest_service_no_location') do
+          location = ''
+          response = MapquestService.find_location(location)
+
+          expect(response).to be_a(Hash)
+          expect(response).to have_key(:info)
+          expect(response[:info]).to have_key(:statuscode)
+          expect(response[:info][:statuscode]).to eq(400)
+          expect(response[:info]).to have_key(:messages)
+          expect(response[:info][:messages]).to eq(["Illegal argument from request: Insufficient info for location"])
+        end
+      end
+    end
   end
 end
