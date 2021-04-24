@@ -3,15 +3,16 @@ require 'rails_helper'
 RSpec.describe 'Forecast Index Page' do
   describe 'happy path' do
     it 'sends the forecast for the given valid location' do
-      get '/api/v1/forecast?location=denver,co'
+      location = 'denver,co'
+      get "/api/v1/forecast?location=#{location}"
 
       result = JSON.parse(response.body, symbolize_names: true)
 
-      expect(result).to be_successful
-      expect(result.response).to eq(200)
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
       expect(result[:data].count).to eq(3)
       expect(result[:data]).to have_key(:id)
-      expect(result[:data][:id]).to eq(null)
+      expect(result[:data][:id]).to eq(nil)
       expect(result[:data]).to have_key(:type)
       expect(result[:data][:type]).to eq('forecast')
       expect(result[:data]).to have_key(:attributes)
