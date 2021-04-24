@@ -8,7 +8,7 @@ RSpec.describe HourlyWeather do
         map_data = MapquestService.find_location(location)[:results].first
         coordinates = Coordinate.new(map_data)
         weather = WeatherService.find_forecast_for_location(coordinates.lat, coordinates.long)
-        hourly_weather = HourlyWeather.new(weather[:hourly])
+        hourly_weather = HourlyWeather.new(weather[:hourly].first)
 
         expect(hourly_weather).to be_a(HourlyWeather)
         expect(hourly_weather.time).to be_a(String)

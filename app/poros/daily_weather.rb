@@ -12,13 +12,13 @@ class DailyWeather
               :icon
 
   def initialize(data)
-    @date = (Time.at(data.first[:dt])).strftime("%Y-%m-%d")
-    @sunrise = Time.at(data.first[:sunrise]).to_s
-    @sunset = Time.at(data.first[:sunset]).to_s
-    @min_temp = data.first[:temp][:min]
-    @max_temp = data.first[:temp][:max]
-    @conditions = data.first[:weather].first[:description]
-    @icon = data.first[:weather].first[:icon]
+    @date = (Time.at(data[:dt])).strftime("%Y-%m-%d")
+    @sunrise = Time.at(data[:sunrise]).to_s
+    @sunset = Time.at(data[:sunset]).to_s
+    @min_temp = data[:temp][:min]
+    @max_temp = data[:temp][:max]
+    @conditions = data[:weather].first[:description]
+    @icon = data[:weather].first[:icon]
   end
 
   # def convert_time(time)
