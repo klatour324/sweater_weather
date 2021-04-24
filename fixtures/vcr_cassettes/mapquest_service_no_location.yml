@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://www.mapquestapi.com/geocoding/v1/address?key=WH9E9BZzbWZgO35z2ITB3SEYxagj26LA&location=
+    uri: https://www.mapquestapi.com/geocoding/v1/address?key=MAPQUEST_KEY&location=
     body:
       encoding: US-ASCII
       string: ''
@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 24 Apr 2021 19:47:54 GMT
+      - Sat, 24 Apr 2021 21:16:47 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
@@ -35,7 +35,7 @@ http_interactions:
       Geocodetransactioncount:
       - '0'
       Last-Modified:
-      - Sat, 24 Apr 2021 19:47:54 GMT
+      - Sat, 24 Apr 2021 21:16:47 GMT
       Pragma:
       - no-cache
       Reversegeocodetransactioncount:
@@ -43,7 +43,7 @@ http_interactions:
       Server:
       - Apache-Coyote/1.1
       Set-Cookie:
-      - JSESSIONID=8E6DF3B7328571502AA9497995D9688F; Path=/; HttpOnly; Secure
+      - JSESSIONID=C39D930B30E360DC46C04BCF571C5E2D; Path=/; HttpOnly; Secure
       Status:
       - success
       Transactionweight:
@@ -56,5 +56,5 @@ http_interactions:
         Inc.","imageUrl":"http://api.mqcdn.com/res/mqlogo.gif","imageAltText":"\u00A9
         2021 MapQuest, Inc."},"messages":["Illegal argument from request: Insufficient
         info for location"]},"options":{"maxResults":-1,"thumbMaps":true,"ignoreLatLngInput":false},"results":[{"providedLocation":{"location":""},"locations":[]}]}'
-  recorded_at: Sat, 24 Apr 2021 19:47:54 GMT
+  recorded_at: Sat, 24 Apr 2021 21:16:47 GMT
 recorded_with: VCR 6.0.0
