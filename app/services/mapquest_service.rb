@@ -5,7 +5,7 @@ class MapquestService
     end
   end
 
-  def self.location(location)
+  def self.find_location(location)
     response = conn.get('/geocoding/v1/address') do |req|
       req.params['location'] = location
     end
