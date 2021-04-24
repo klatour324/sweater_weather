@@ -13,6 +13,8 @@ require 'rspec/rails'
 VCR.configure do |config|
   config.cassette_library_dir = "fixtures/vcr_cassettes"
   config.hook_into :webmock
+  config.allow_http_connections_when_no_cassette = true
+  config.default_cassette_options = { re_record_interval: 7.days }
 end
 # Add additional requires below this line. Rails is not loaded until this point!
 
