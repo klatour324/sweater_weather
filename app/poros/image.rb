@@ -15,7 +15,7 @@ class Image
 
   def credit_data(data)
     {
-      source: "unsplash.com",
+      source: "https://unsplash.com?utm_source=sweater_weather&utm_medium=referral",
       author: data[:user][:username],
       author_profile: data[:user][:links][:html]
     }
