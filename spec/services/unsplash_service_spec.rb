@@ -6,7 +6,7 @@ RSpec.describe UnsplashService do
       it 'fetches a background image based on city location input' do
         VCR.use_cassette('unsplash_pic_data') do
           location = 'Denver'
-          image_result = UnsplashService.search_photos(location)
+          image_result = UnsplashService.search_images(location)
 
           expect(image_result).to be_a(Hash)
           expect(image_result).to have_key(:total)
