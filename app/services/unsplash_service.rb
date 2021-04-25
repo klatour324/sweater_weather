@@ -5,8 +5,8 @@ class UnsplashService
     end
   end
 
-  def self.search_photos(location)
-    response = conn.get('/search/photos') do |req|
+  def self.search_images(location)
+    response = conn.get('/search/photos?') do |req|
       req.params['query'] = location
     end
     JSON.parse(response.body, symbolize_names: true)
