@@ -8,12 +8,12 @@ RSpec.describe HourlyWeather do
         map_data = MapquestService.find_location(location)[:results].first
         coordinates = Coordinate.new(map_data)
         weather = WeatherService.find_forecast_for_location(coordinates.lat, coordinates.long)
-        hourly_weather = HourlyWeather.new(weather[:hourly])
+        hourly_weather = HourlyWeather.new(weather[:hourly].first)
 
         expect(hourly_weather).to be_a(HourlyWeather)
-        expect(hourly_weather.date).to be_a(String)
-        expect(hourly_weather.date).to eq(Time.at(weather[:hourly].first[:dt]).strftime("%H:-%M:-%S"))
-        expect(hourly_weather.temp).to be_a(Float)
+        expect(hourly_weather.time).to be_a(String)
+        expect(hourly_weather.time).to eq(Time.at(weather[:hourly].first[:dt]).strftime("%H:%M:%S"))
+        expect(hourly_weather.temperature).to be_a(Float)
         expect(hourly_weather.conditions).to be_a(String)
         expect(hourly_weather.icon).to be_a(String)
       end

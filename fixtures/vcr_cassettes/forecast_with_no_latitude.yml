@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://www.mapquestapi.com/geocoding/v1/address?key=WH9E9BZzbWZgO35z2ITB3SEYxagj26LA&location=Denver,%20CO
+    uri: https://www.mapquestapi.com/geocoding/v1/address?key=MAPQUEST_KEY&location=Denver,%20CO
     body:
       encoding: US-ASCII
       string: ''
@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 24 Apr 2021 20:01:15 GMT
+      - Sat, 24 Apr 2021 21:16:49 GMT
       Content-Type:
       - application/json;charset=UTF-8
       Content-Length:
@@ -35,7 +35,7 @@ http_interactions:
       Geocodetransactioncount:
       - '1'
       Last-Modified:
-      - Sat, 24 Apr 2021 20:01:15 GMT
+      - Sat, 24 Apr 2021 21:16:49 GMT
       Pragma:
       - no-cache
       Reversegeocodetransactioncount:
@@ -43,7 +43,7 @@ http_interactions:
       Server:
       - Apache-Coyote/1.1
       Set-Cookie:
-      - JSESSIONID=1817F6D8E8F91C3F52047F87CAF22759; Path=/; HttpOnly; Secure
+      - JSESSIONID=9E88854E347540E29406E6082C8EBB60; Path=/; HttpOnly; Secure
       Status:
       - success
       Transactionweight:
@@ -56,12 +56,12 @@ http_interactions:
         Inc.","imageUrl":"http://api.mqcdn.com/res/mqlogo.gif","imageAltText":"\u00A9
         2021 MapQuest, Inc."},"messages":[]},"options":{"maxResults":-1,"thumbMaps":true,"ignoreLatLngInput":false},"results":[{"providedLocation":{"location":"Denver,
         CO"},"locations":[{"street":"","adminArea6":"","adminArea6Type":"Neighborhood","adminArea5":"Denver","adminArea5Type":"City","adminArea4":"Denver
-        County","adminArea4Type":"County","adminArea3":"CO","adminArea3Type":"State","adminArea1":"US","adminArea1Type":"Country","postalCode":"","geocodeQualityCode":"A5XAX","geocodeQuality":"CITY","dragPoint":false,"sideOfStreet":"N","linkId":"282041090","unknownInput":"","type":"s","latLng":{"lat":39.738453,"lng":-104.984853},"displayLatLng":{"lat":39.738453,"lng":-104.984853},"mapUrl":"http://www.mapquestapi.com/staticmap/v5/map?key=WH9E9BZzbWZgO35z2ITB3SEYxagj26LA&type=map&size=225,160&locations=39.738453,-104.984853|marker-sm-50318A-1&scalebar=true&zoom=12&rand=1252164908"},{"street":"","adminArea6":"","adminArea6Type":"Neighborhood","adminArea5":"","adminArea5Type":"City","adminArea4":"Denver
-        County","adminArea4Type":"County","adminArea3":"CO","adminArea3Type":"State","adminArea1":"US","adminArea1Type":"Country","postalCode":"","geocodeQualityCode":"A4XAX","geocodeQuality":"COUNTY","dragPoint":false,"sideOfStreet":"N","linkId":"282932003","unknownInput":"","type":"s","latLng":{"lat":39.738453,"lng":-104.984853},"displayLatLng":{"lat":39.738453,"lng":-104.984853},"mapUrl":"http://www.mapquestapi.com/staticmap/v5/map?key=WH9E9BZzbWZgO35z2ITB3SEYxagj26LA&type=map&size=225,160&locations=39.738453,-104.984853|marker-sm-50318A-2&scalebar=true&zoom=9&rand=972854505"}]}]}'
-  recorded_at: Sat, 24 Apr 2021 20:01:15 GMT
+        County","adminArea4Type":"County","adminArea3":"CO","adminArea3Type":"State","adminArea1":"US","adminArea1Type":"Country","postalCode":"","geocodeQualityCode":"A5XAX","geocodeQuality":"CITY","dragPoint":false,"sideOfStreet":"N","linkId":"282041090","unknownInput":"","type":"s","latLng":{"lat":39.738453,"lng":-104.984853},"displayLatLng":{"lat":39.738453,"lng":-104.984853},"mapUrl":"http://www.mapquestapi.com/staticmap/v5/map?key=MAPQUEST_KEY&type=map&size=225,160&locations=39.738453,-104.984853|marker-sm-50318A-1&scalebar=true&zoom=12&rand=1962812726"},{"street":"","adminArea6":"","adminArea6Type":"Neighborhood","adminArea5":"","adminArea5Type":"City","adminArea4":"Denver
+        County","adminArea4Type":"County","adminArea3":"CO","adminArea3Type":"State","adminArea1":"US","adminArea1Type":"Country","postalCode":"","geocodeQualityCode":"A4XAX","geocodeQuality":"COUNTY","dragPoint":false,"sideOfStreet":"N","linkId":"282932003","unknownInput":"","type":"s","latLng":{"lat":39.738453,"lng":-104.984853},"displayLatLng":{"lat":39.738453,"lng":-104.984853},"mapUrl":"http://www.mapquestapi.com/staticmap/v5/map?key=MAPQUEST_KEY&type=map&size=225,160&locations=39.738453,-104.984853|marker-sm-50318A-2&scalebar=true&zoom=9&rand=349481727"}]}]}'
+  recorded_at: Sat, 24 Apr 2021 21:16:49 GMT
 - request:
     method: get
-    uri: https://api.openweathermap.org/data/2.5/onecall?appid=5ed75f0c9fb3dd4dbd35f9d3c68fd7bc&exclude=minutely&lang=lang&lat=&lon=-104.984853&units=imperial
+    uri: https://api.openweathermap.org/data/2.5/onecall?appid=WEATHER_KEY&exclude=minutely&lang=lang&lat=&lon=-104.984853&units=imperial
     body:
       encoding: US-ASCII
       string: ''
@@ -80,7 +80,7 @@ http_interactions:
       Server:
       - openresty
       Date:
-      - Sat, 24 Apr 2021 20:01:15 GMT
+      - Sat, 24 Apr 2021 21:16:49 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -98,5 +98,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"cod":"400","message":"Nothing to geocode"}'
-  recorded_at: Sat, 24 Apr 2021 20:01:15 GMT
+  recorded_at: Sat, 24 Apr 2021 21:16:49 GMT
 recorded_with: VCR 6.0.0
