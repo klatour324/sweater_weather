@@ -4,10 +4,12 @@ class Api::V1::UsersController < ApplicationController
     if !valid_params.all? { |key| params.has_key?(key) }
       error = "Invalid request. Please try again."
       render(error)
-    else
+    elsif
       new_user = User.new(user_params)
       if new_user.save
         render json: UsersSerializer.new(new_user), status: :created
+      else
+        error(new_user.errors.full_messages.to_sentence)
       end
     end
   end
