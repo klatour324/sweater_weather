@@ -154,17 +154,26 @@ RSpec.describe 'Forecast Index Page' do
       end
     end
 
-    it 'returns an error response if no city is provided within the location' do
-      VCR.use_cassette('no_city_in_location') do
-        location = ',co'
-        get "/api/v1/forecast?location=#{location}"
-
-        result = JSON.parse(response.body, symbolize_names: true)
-        require "pry"; binding.pry
-
-        expect(response.status).to eq(400)
-        expect(result[:error]).to eq("Invalid location parameter")
-      end
-    end
+    # it 'returns an error response if no city is provided within the location' do
+    #   VCR.use_cassette('no_city_in_location') do
+    #     location = ',co'
+    #     get "/api/v1/forecast?location=#{location}"
+    #
+    #     result = JSON.parse(response.body, symbolize_names: true)
+    #     expect(response.status).to eq(400)
+    #     expect(result[:error]).to eq("Invalid location parameter")
+    #   end
+    # end
+    #
+    # it 'returns an error response if no state code is provided within the location' do
+    #   VCR.use_cassette('no_state_code_in_location') do
+    #     location = 'denver'
+    #     get "/api/v1/forecast?location=#{location}"
+    #
+    #     result = JSON.parse(response.body, symbolize_names: true)
+    #     expect(response.status).to eq(200)
+    #     expect(result[:error]).to eq("Please specify the state code for the location")
+    #   end
+    # end
   end
 end
