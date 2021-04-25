@@ -58,7 +58,25 @@ RSpec.describe 'Users Registration' do
       end
 
       it 'returns an error response if email already exists' do
+        user1 = User.create(email: "whatever@example.com", password:"test", password_confirmation: "test")
 
+        user_request_body = {
+          email: "whatever@example.com",
+          password: "password",
+          password_confirmation: "password"
+        }
+
+        headers = { "CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json" }
+
+
+        post "/api/v1/users", headers: headers, params: user_request_body.to_json
+
+
+        result = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to_not be_successful
+        expect(response.status).to eq(400)
+        expect(result[:error]).to eq("Email has already been taken")
       end
 
       it 'returns an error response if the request is missing a field' do
