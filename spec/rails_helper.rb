@@ -17,6 +17,7 @@ VCR.configure do |config|
   config.default_cassette_options = { re_record_interval: 7.days }
   config.filter_sensitive_data('MAPQUEST_KEY') {ENV['MAPQUEST_KEY']}
   config.filter_sensitive_data('WEATHER_KEY') {ENV['WEATHER_KEY']}
+  config.filter_sensitive_data('UNSPLASH_KEY') {ENV['UNSPLASH_KEY']}
 end
 # Add additional requires below this line. Rails is not loaded until this point!
 
