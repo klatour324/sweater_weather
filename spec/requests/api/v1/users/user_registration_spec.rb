@@ -33,6 +33,7 @@ RSpec.describe 'Users Registration' do
       expect(result[:data][:attributes][:email]).to be_a(String)
       expect(result[:data][:attributes]).to have_key(:api_key)
       expect(result[:data][:attributes][:api_key]).to be_a(String)
+      expect(result[:data][:attributes][:api_key].length).to eq(28)
     end
   end
 end
