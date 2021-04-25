@@ -35,5 +35,34 @@ RSpec.describe 'Users Registration' do
       expect(result[:data][:attributes][:api_key]).to be_a(String)
       expect(result[:data][:attributes][:api_key].length).to eq(28)
     end
+
+    describe 'sad path' do
+      it 'returns an error response if requests passwords do not match' do
+        user_request_body = {
+          email: "whatever@example.com",
+          password: "password",
+          password_confirmation: "test"
+        }
+
+        headers = { "CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json" }
+
+        post "/api/v1/users", headers: headers, params: user_request_body.to_json
+
+        user = User.find_by(email: user_request_body[:email])
+
+        result = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to_not be_successful
+        expect(response.status).to eq(400)
+        expect(result[:error]).to eq("Password confirmation doesn't match Password")
+      end
+
+      it 'returns an error response if email already exists' do
+
+      end
+
+      it 'returns an error response if the request is missing a field' do
+      end
+    end
   end
 end
