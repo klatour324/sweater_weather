@@ -21,6 +21,40 @@ RSpec.describe MapquestService do
           expect(data[:results].first[:locations].first[:latLng][:lng]).to be_a(Float)
         end
       end
+      describe 'get route' do
+          it 'fetches a route for a trip with a given origin and destination for locations' do
+            VCR.use_cassette('road_trip_route') do
+            start = 'chicago,il'
+            destination = 'denver,co'
+
+            result = MapquestService.get_directions(start, destination)
+
+            expect(result).to be_a(Hash)
+            expect(result).to have_key(:route)
+            expect(result[:route]).to be_a(Hash)
+            expect(result[:route]).to have_key(:boundingBox)
+            expect(result[:route][:boundingBox]).to be_a(Hash)
+            expect(result[:route][:boundingBox]).to have_key(:lr)
+            expect(result[:route][:boundingBox][:lr]).to be_a(Hash)
+            expect(result[:route][:boundingBox][:lr]).to have_key(:lng)
+            expect(result[:route][:boundingBox][:lr][:lng]).to be_a(Float)
+            expect(result[:route][:boundingBox][:lr]).to have_key(:lat)
+            expect(result[:route][:boundingBox][:lr][:lat]).to be_a(Float)
+            expect(result[:route][:boundingBox]).to have_key(:ul)
+            expect(result[:route][:boundingBox][:ul]).to be_a(Hash)
+            expect(result[:route][:boundingBox][:ul]).to have_key(:lng)
+            expect(result[:route][:boundingBox][:ul][:lng]).to be_a(Float)
+            expect(result[:route][:boundingBox][:ul]).to have_key(:lat)
+            expect(result[:route][:boundingBox][:ul][:lat]).to be_a(Float)
+            expect(result[:route]).to have_key(:distance)
+            expect(result[:route][:distance]).to be_a(Float)
+            expect(result[:route]).to have_key(:formattedTime)
+            expect(result[:route][:formattedTime]).to be_a(String)
+            expect(result[:route]).to have_key(:realTime)
+            expect(result[:route][:realTime]).to be_an(Integer)
+          end
+        end
+      end
     end
 
     describe 'sad path' do
