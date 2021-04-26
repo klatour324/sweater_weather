@@ -1,16 +1,27 @@
 class Salary
-    attr_reader :destination,
-                :forecast,
-                :salaries
+    attr_reader :id,
+                :destination
 
 
-    def initialize(data)
-      @destination = data[:destination]
-      @forecast = CurrentWeather.new(data[:current])
-      @salaries = data[:salaries]
+
+
+    def initialize(destination)
+      @id = id
+      @destination = destination
     end
 
-    # def tech_salaries(data)
-    #
-    # end
+    def weather_forecast(destination)
+      coordinates = MapquestService.find_location(destination)
+      coordinates = coordinates[:results].first[:locations].first[:latLng]
+      forecast = WeatherService.find_forecast_for_location(coordinates)
+    end
+
+    def salaries(destination)
+      salaries = TeleportService.find_salaries(destination.downcase)
+    job_titles = ["Data Analyst","Data Scientist","Mobile Developer",
+            "QA Engineer","Software Engineer","Systems Administrator","Web Developer"]
+    job_titles.map do |job_title|
+      # require "pry"; binding.pry
+    end
+  end
 end
