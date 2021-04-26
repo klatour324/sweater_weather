@@ -100,5 +100,20 @@ RSpec.describe 'Users Login Session' do
       expect(response.status).to eq(400)
       expect(result[:error]).to eq("Password or email is incorrect.")
     end
+
+    it 'returns an error response if requests is not sent in json format' do
+      user_request_body = {
+        email: 'whatever@example.com',
+        password: 'password'
+      }
+
+      post "/api/v1/sessions", headers: headers, params: user_request_body.to_json
+
+      result = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+      expect(result[:error]).to eq("Password or email is incorrect.")
+    end
   end
 end
