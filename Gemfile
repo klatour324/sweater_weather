@@ -29,7 +29,7 @@ gem 'json'
 gem 'fast_jsonapi'
 gem 'figaro'
 gem 'geokit'
-
+gem 'bcrypt', '~>3.1.7'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
