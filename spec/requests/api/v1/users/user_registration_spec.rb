@@ -53,8 +53,8 @@ RSpec.describe 'Users Registration' do
         result = JSON.parse(response.body, symbolize_names: true)
 
         expect(response).to_not be_successful
-        expect(response.status).to eq(400)
-        expect(result[:error]).to eq("Password confirmation doesn't match Password")
+        expect(response.status).to eq(404)
+        expect(result[:error]).to eq("Validation failed: Password confirmation doesn't match Password")
       end
 
       it 'returns an error response if email already exists' do
@@ -75,8 +75,8 @@ RSpec.describe 'Users Registration' do
         result = JSON.parse(response.body, symbolize_names: true)
 
         expect(response).to_not be_successful
-        expect(response.status).to eq(400)
-        expect(result[:error]).to eq("Email has already been taken")
+        expect(response.status).to eq(404)
+        expect(result[:error]).to eq("Validation failed: Email has already been taken")
       end
 
       it 'returns an error response if the request is missing a field' do
