@@ -1,7 +1,7 @@
 class Api::V1::SessionsController < ApplicationController
   def create
     if !valid_params.all? { |key| params.has_key?(key) }
-      error = "Invalid request. Please try again."
+      error = "Password or email is incorrect."
       error(error)
     elsif
       user = User.find_by(email: params[:email].downcase)
