@@ -4,12 +4,11 @@ RSpec.describe TeleportService do
   describe 'happy path' do
     describe 'fetch data' do
       it 'returns the tech salaries info for the given location' do
-        location = 'Chicago'
-        tech_salaries = TeleportService.get_salaries(location)
+        location = 'chicago'
+        tech_salaries = TeleportService.find_salaries_for_location(location)
 
         expect(tech_salaries).to be_a(Hash)
         expect(tech_salaries).to have_key(:_links)
-        expect(tech_salaries).to have_key(:total_pages)
         expect(tech_salaries[:_links]).to be_a(Hash)
         expect(tech_salaries[:_links]).to have_key(:curies)
         expect(tech_salaries[:_links][:curies]).to be_an(Array)
