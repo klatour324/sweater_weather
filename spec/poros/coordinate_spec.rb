@@ -10,7 +10,7 @@ RSpec.describe Coordinate do
 
         expect(coordinates).to be_a(Coordinate)
         expect(coordinates.lat).to be_a(Float)
-        expect(coordinates.long).to be_a(Float)
+        expect(coordinates.lng).to be_a(Float)
       end
     end
   end

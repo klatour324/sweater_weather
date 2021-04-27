@@ -1,7 +1,7 @@
 class ForecastFacade
   def self.get_forecast(location)
     coordinates = get_coordinates(location)
-    weather = WeatherService.find_forecast_for_location(coordinates.lat, coordinates.long)
+    weather = WeatherService.find_forecast_for_location(coordinates.lat, coordinates.lng)
     Forecast.new(weather)
   end
 
