@@ -71,6 +71,55 @@ RSpec.describe MapquestService do
           expect(response[:info][:messages]).to eq(["Illegal argument from request: Insufficient info for location"])
         end
       end
+
+      it 'returns a response error if the origin(start) is empty' do
+        VCR.use_cassette('mapquest_service_no_origin') do
+          start = ''
+          destination = 'denver,co'
+          result = MapquestService.get_directions(start, destination)
+
+          expect(result).to be_a(Hash)
+          expect(result).to have_key(:info)
+          expect(result[:info]).to be_a(Hash)
+          expect(result[:info]).to have_key(:statuscode)
+          expect(result[:info][:statuscode]).to eq(611)
+          expect(result[:info]).to have_key(:messages)
+          expect(result[:info][:messages]).to be_an(Array)
+          expect(result[:info][:messages].first).to eq("At least two locations must be provided.")
+        end
+      end
+
+      it 'returns a response error if the destination is empty' do
+        VCR.use_cassette('mapquest_service_no_destination') do
+          start = 'chicago,il'
+          destination = ''
+          result = MapquestService.get_directions(start, destination)
+
+          expect(result).to be_a(Hash)
+          expect(result).to have_key(:info)
+          expect(result[:info]).to be_a(Hash)
+          expect(result[:info]).to have_key(:statuscode)
+          expect(result[:info][:statuscode]).to eq(611)
+          expect(result[:info]).to have_key(:messages)
+          expect(result[:info][:messages]).to be_an(Array)
+          expect(result[:info][:messages].first).to eq("At least two locations must be provided.")
+        end
+      end
+
+      it 'returns an error if destination is impossible to make' do
+        VCR.use_cassette('maquest_impossible_destination') do
+          start = 'chicago,il'
+          destination = 'paris,fr'
+          result = MapquestService.get_directions(start, destination)
+
+          expect(result).to be_a(Hash)
+          expect(result).to have_key(:info)
+          expect(result[:info]).to have_key(:statuscode)
+          expect(result[:info][:statuscode]).to eq(402)
+          expect(result[:info]).to have_key(:messages)
+          expect(result[:info][:messages].first).to eq("We are unable to route with the given locations.")
+        end
+      end
     end
   end
 end
