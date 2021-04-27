@@ -40,24 +40,23 @@ RSpec.describe 'Salaries for Destination' do
     end
   end
 
-  # describe 'sad path' do
-  #   it 'returns an error response if user sends an empty string for location' do
-  #     location = ''
-  #     get "/api/v1/salaries?destination=#{location}"
-  #
-  #     result = JSON.parse(response.body, symbolize_names: true)
-  #
-  #     expect(response.status).to eq(400)
-  #     expect(result[:error]).to eq("Invalid location parameter")
-  #   end
-  #
-  #   it 'returns an error response if user sends nothing for location' do
-  #     get "/api/v1/salaries"
-  #
-  #     result = JSON.parse(response.body, symbolize_names: true)
-  #
-  #     expect(response.status).to eq(400)
-  #     expect(result[:error]).to eq("Invalid location parameter")
-  #   end
-  # end
+  describe 'sad path' do
+    it 'returns an error response if user sends an empty string for destination' do
+      destination = ''
+      get "/api/v1/salaries?destination=#{destination}"
+
+      result = JSON.parse(response.body, symbolize_names: true)
+      expect(response.status).to eq(400)
+      expect(result[:error]).to eq("Invalid destination parameter")
+    end
+
+    it 'returns an error response if user sends nothing for destination' do
+      get "/api/v1/salaries"
+
+      result = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response.status).to eq(400)
+      expect(result[:error]).to eq("Invalid destination parameter")
+    end
+  end
 end
