@@ -37,4 +37,13 @@ RSpec.describe TeleportService do
       end
     end
   end
+
+  describe 'sad path' do
+    it 'returns an error message when no location is provided' do
+      location = ''
+      tech_salaries = TeleportService.find_salaries_for_location(location)
+
+      expect(tech_salaries).to eq(nil)
+    end
+  end
 end
