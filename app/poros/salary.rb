@@ -10,11 +10,14 @@ class Salary
       @forecast_data = forecast_data
     end
 
-    # def forecast(destination)
-    #   coordinates = MapquestService.find_location(destination)
-    #   coordinates = coordinates[:results].first[:locations].first[:latLng]
-    #   forecast = WeatherService.find_forecast_for_location(coordinates)
-    # end
+    def forecast
+      summary = @forecast_data[:current][:weather].first[:description]
+      temperature = "#{(@forecast_data[:current][:temp]).to_i} F"
+        {
+          summary: summary,
+          temperature: temperature
+        }
+    end
 
     def salaries
       salaries = TeleportService.find_salaries_for_location(destination.downcase)
@@ -27,7 +30,6 @@ class Salary
       job_titles.include?(info[:job][:title])
     end
     tech_jobs.map do |job|
-      # require "pry"; binding.pry
       {
         title: job[:job][:title],
         min: number_to_currency(job[:salary_percentiles][:percentile_25]),
