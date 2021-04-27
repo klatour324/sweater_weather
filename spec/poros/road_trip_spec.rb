@@ -5,10 +5,11 @@ RSpec.describe RoadTrip do
     it 'creates a roadtrip PORO based on input' do
       origin = 'Denver,CO'
       destination = 'Pueblo,CO'
-      data = MapquestService.get_directions(origin, destination)
-      forecast = ForecastFacade.get_forecast(destination)
+      trip_data = MapquestService.get_directions(origin, destination)
+      coordinates = Coordinate.new(trip_data[:route][:boundingBox])
+      forecast = WeatherService.find_forecast_for_location(coordinates.lat, coordinates.lng)
 
-      road_trip = RoadTrip.new(origin, destination, data, forecast)
+      road_trip = RoadTrip.new(origin, destination, trip_data, forecast)
 
       expect(road_trip).to be_a(RoadTrip)
       expect(road_trip.id).to eq(nil)
