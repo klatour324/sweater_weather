@@ -2,10 +2,7 @@ class Salary
     attr_reader :id,
                 :destination
 
-
-
-
-    def initialize(destination)
+    def initialize(destination, salary_data, forecast_data)
       @id = id
       @destination = destination
     end
