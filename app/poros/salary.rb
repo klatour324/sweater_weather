@@ -1,4 +1,5 @@
 class Salary
+  include ActionView::Helpers
     attr_reader :id,
                 :destination
 
@@ -26,7 +27,12 @@ class Salary
       job_titles.include?(info[:job][:title])
     end
     tech_jobs.map do |job|
-      require "pry"; binding.pry
+      # require "pry"; binding.pry
+      {
+        title: job[:job][:title],
+        min: number_to_currency(job[:salary_percentiles][:percentile_25]),
+        max: number_to_currency(job[:salary_percentiles][:percentile_75])
+      }
     end
   end
 end
