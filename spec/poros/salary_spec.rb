@@ -37,7 +37,7 @@ RSpec.describe Salary do
       expect(salary.salaries.count).to eq(7)
       expect(salary.salaries.first).to be_a(Hash)
       expect(salary.salaries.first.keys.count).to eq(3)
-      expect(salary.salaries.last).to (Hash)
+      expect(salary.salaries.last).to be_a(Hash)
       expect(salary.salaries.last.keys.count).to eq(3)
       expect(salary.salaries.last).to have_key(:title)
       expect(salary.salaries.last[:title]).to be_a(String)
