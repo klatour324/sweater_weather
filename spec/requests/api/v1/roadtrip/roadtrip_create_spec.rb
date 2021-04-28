@@ -145,6 +145,39 @@ RSpec.describe 'Road Trip Create' do
   end
 
   describe 'sad path' do
+    it 'returns an error response if the origin is not provided' do
+      VCR.use_cassette('road_trip_no_origin') do
+        road_trip_request_body = {
+            destination: 'Pueblo,CO'
+        }
+
+        headers = { "CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json" }
+
+        post "/api/v1/road_trip", headers: headers, params: road_trip_request_body.to_json
+
+        result = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response.status).to eq(400)
+        expect(result[:error]).to eq("Invalid parameters")
+      end
+    end
+
+    it 'returns an error response if the destination is not provided' do
+      VCR.use_cassette('road_trip_no_destination') do
+        road_trip_request_body = {
+            origin: 'Denver,CO'
+        }
+
+        headers = { "CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json" }
+
+        post "/api/v1/road_trip", headers: headers, params: road_trip_request_body.to_json
+
+        result = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response.status).to eq(400)
+        expect(result[:error]).to eq("Invalid parameters")
+      end
+    end
     it 'returns a 401 unauthorized response if request is sent without an api key' do
       VCR.use_cassette('401_unauthorized_error') do
         road_trip_request_body = {

@@ -1,5 +1,6 @@
 class Api::V1::RoadTripController < ApplicationController
   def create
+    return error("Invalid parameters") if !params[:origin] || !params[:destination]
     user = User.find_by!(api_key: params[:api_key])
     start = params[:origin]
     destination = params[:destination]
