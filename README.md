@@ -10,7 +10,7 @@ Sweater Weather is a Rails application that consumes three APIs to build the bac
   - [Getting Started](#getting-started)
   - [Running the tests](#running-the-tests)
   - [APIs](#apis)
-  - [DB Schema](#db-schema)
+  - [Working with Postman](#working-with-postman)
   - [Endpoints](#endpoints)
   - [Testing](#testing)
   - [Built With](#built-with)
