@@ -14,7 +14,7 @@ class RoadTrip
   end
 
   def find_travel_time(data)
-    if data[:messages].blank?
+    if data[:info][:messages].blank?
       split_time = (data[:route][:formattedTime]).split(':')
       "#{split_time[0]} hours, #{split_time[1]} minutes"
     else
@@ -22,16 +22,21 @@ class RoadTrip
     end
   end
 
-  # arrival_time
-  # what's the forecast at the destination upon arrival
+  # def calculate_arrival_time(data, forecast)
+  #   split_time = (data[:route][:formattedTime]).split(':')
+  #   time_to_seconds = (split_time[0].to_i * 3600) + (split_time[1].to_i * 60)
+  #   current_time_for_destination = Time.at(forecast[:current][:dt])
+  #   calculated_arrival_time = current_time_for_destination + time_to_seconds
+  # end
 
 
   def get_weather_for_destination(data, forecast)
+    return {} if !data[:info][:messages].blank?
     split_time = (data[:route][:formattedTime]).split(':')
     time_to_seconds = (split_time[0].to_i * 3600) + (split_time[1].to_i * 60)
     current_time_for_destination = Time.at(forecast[:current][:dt])
     calculated_arrival_time = current_time_for_destination + time_to_seconds
-
+    # calculate_arrival_time
     weeks = 167
     days = 48
 

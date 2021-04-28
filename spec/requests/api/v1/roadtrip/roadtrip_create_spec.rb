@@ -97,24 +97,71 @@ RSpec.describe 'Road Trip Create' do
         expect(result[:data][:attributes][:weather_at_eta]).to have_key(:conditions)
       end
     end
+
+    it 'creates a new roadtrip and gives the duration and weather conditions for a trip greater than a week' do
+      VCR.use_cassette('london_to_capetown') do
+        road_trip_request_body = {
+            origin: 'London, England',
+            destination: 'Capetown, South Africa',
+            api_key: @user.api_key
+        }
+
+        headers = { "CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json" }
+        post "/api/v1/road_trip", headers: headers, params: road_trip_request_body.to_json
+
+        result = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to be_successful
+        expect(response.status).to eq(200)
+        expect(result[:data][:attributes][:start_city]).to eq(road_trip_request_body[:origin])
+        expect(result[:data][:attributes][:end_city]).to eq(road_trip_request_body[:destination])
+        expect(result[:data][:attributes][:travel_time]).to eq("168 hours, 28 minutes")
+        expect(result[:data][:attributes]).to have_key(:weather_at_eta)
+        expect(result[:data][:attributes][:weather_at_eta]).to be_a(Hash)
+        expect(result[:data][:attributes][:weather_at_eta]).to eq({})
+      end
+    end
+
+    it 'does not create a roadtrip and returns a message if the trip is impossible to drive' do
+      VCR.use_cassette('new_york_to_london') do
+        road_trip_request_body = {
+            origin: 'New York, NY',
+            destination: 'London, England',
+            api_key: @user.api_key
+        }
+
+        headers = { "CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json" }
+        post "/api/v1/road_trip", headers: headers, params: road_trip_request_body.to_json
+
+        result = JSON.parse(response.body, symbolize_names: true)
+        expect(response.status).to eq(200)
+        expect(result[:data][:attributes]).to be_a(Hash)
+        expect(result[:data][:attributes].keys.count).to eq(4)
+        expect(result[:data][:attributes][:start_city]).to eq(road_trip_request_body[:origin])
+        expect(result[:data][:attributes][:end_city]).to eq(road_trip_request_body[:destination])
+        expect(result[:data][:attributes][:travel_time]).to eq('impossible route')
+      end
+    end
   end
 
-  # describe 'sad path' do
-  #   it 'returns a 401 unauthorized response if request is sent without an api key' do
-  #     VCR.use_cassette('401_unauthorized_error') do
-  #       road_trip_request_body = {
-  #           origin: 'Denver,CO',
-  #           destination: 'Pueblo,CO'
-  #       }
-  #
-  #       headers = { "CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json" }
-  #
-  #       post "/api/v1/road_trip", headers: headers, params: road_trip_request_body.to_json
-  #
-  #       result = JSON.parse(response.body, symbolize_names: true)
-  #
-  #       expect(response).to_not be_successful
-  #       expect(response.status).to eq(401)
-  #       expect(response.status).to eq(401)
-  #     end
+  describe 'sad path' do
+    it 'returns a 401 unauthorized response if request is sent without an api key' do
+      VCR.use_cassette('401_unauthorized_error') do
+        road_trip_request_body = {
+            origin: 'Denver,CO',
+            destination: 'Pueblo,CO'
+        }
+
+        headers = { "CONTENT_TYPE" => "application/json", "ACCEPT" => "application/json" }
+
+        post "/api/v1/road_trip", headers: headers, params: road_trip_request_body.to_json
+
+        result = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to_not be_successful
+        expect(response.status).to eq(401)
+        expect(result[:error]).to eq("Couldn't find User")
+      end
+    end
+  end
 end

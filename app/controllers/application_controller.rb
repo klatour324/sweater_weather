@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+rescue_from ActiveRecord::RecordNotFound, with: :unauthorized
 rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
 
   def error(message = "Invalid request error. Please check the request")
@@ -10,7 +10,7 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_record
     render json: { error: exception.message }, status: :not_found
   end
 
-  def record_not_found(exception)
-    render json: { error: exception.message }, status: :not_found
+  def unauthorized(exception)
+    render json: { error: exception.message }, status: :unauthorized
   end
 end
