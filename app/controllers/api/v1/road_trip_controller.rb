@@ -4,6 +4,7 @@ class Api::V1::RoadTripController < ApplicationController
     user = User.find_by!(api_key: params[:api_key])
     start = params[:origin]
     destination = params[:destination]
+    # road_trip = RoadTripFacade.create_new_road_trip(params)
 
     trip_data = MapquestService.get_directions(start, destination)
     coordinates = Coordinate.new(trip_data[:route][:boundingBox])
