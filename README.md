@@ -11,6 +11,7 @@ Sweater Weather is a Rails application that consumes three APIs to build the bac
   - [Running the tests](#running-the-tests)
   - [APIs](#apis)
   - [Working with Postman](#working-with-postman)
+  - [Database Schema](#database-schema)
   - [Endpoints](#endpoints)
   - [Testing](#testing)
   - [Built With](#built-with)
@@ -59,6 +60,9 @@ The following APIs were consumed for further data to support this application:
 
 ## Working with Postman
 Postman is a great application that makes consuming and exposing APIs simple to understand and work with the data. For more details about how to set up Postman and get started with consuming/building API endpoints, please visit their website [Postman](https://www.postman.com/)
+
+## Database Schema
+![Users Table](https://app.dbdesigner.net/designer/schema/415238)
 
 ## Endpoints
 Here are the following endpoints available with Sweater Weather:
