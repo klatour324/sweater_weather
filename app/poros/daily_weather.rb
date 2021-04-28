@@ -20,9 +20,4 @@ class DailyWeather
     @conditions = data[:weather].first[:description]
     @icon = data[:weather].first[:icon]
   end
-
-  # def convert_time(time)
-  #   datetime = Time.at(time)
-  #   datetime.strftime("%Y-%m-%d%H:%M:%S%z")
-  # end
 end
