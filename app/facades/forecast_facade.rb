@@ -14,6 +14,6 @@ class ForecastFacade
     return true if params[:location].nil?
 
     city, state = params[:location].split(',')
-    params[:location] == '' || city.nil? || state.nil?
+    params[:location] == '' || city.blank? || state.blank?
   end
 end

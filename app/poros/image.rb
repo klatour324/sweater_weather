@@ -13,6 +13,14 @@ class Image
     @credit = credit_data(data)
   end
 
+  def image
+    {
+      location: @location,
+      image_url: @image_url,
+      credit: @credit
+    }
+  end
+
   def credit_data(data)
     {
       source: "https://unsplash.com?utm_source=sweater_weather&utm_medium=referral",
