@@ -1,8 +1,29 @@
 class Coordinate
   attr_reader :lat,
-              :long
+              :lng
+
   def initialize(data)
-    @lat = data[:locations].first[:latLng][:lat]
-    @long = data[:locations].first[:latLng][:lng]
+    @lat = find_lat(data)
+    @lng = find_lng(data)
+  end
+
+  def find_lat(data)
+    return nil if data.nil?
+
+    if data[:locations]
+      data[:locations].first[:latLng][:lat]
+    else
+      data[:lr][:lat]
+    end
+  end
+
+  def find_lng(data)
+    return nil if data.nil?
+    
+    if data[:locations]
+      data[:locations].first[:latLng][:lng]
+    else
+      data[:lr][:lng]
+    end
   end
 end

@@ -7,7 +7,7 @@ RSpec.describe Forecast do
         location = 'denver,co'
         map_data = MapquestService.find_location(location)[:results].first
         coordinates = Coordinate.new(map_data)
-        weather = WeatherService.find_forecast_for_location(coordinates.lat, coordinates.long)
+        weather = WeatherService.find_forecast_for_location(coordinates.lat, coordinates.lng)
         forecast = Forecast.new(weather)
 
         expect(forecast).to be_a(Forecast)

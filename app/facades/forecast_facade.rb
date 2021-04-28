@@ -1,7 +1,7 @@
 class ForecastFacade
   def self.get_forecast(location)
     coordinates = get_coordinates(location)
-    weather = WeatherService.find_forecast_for_location(coordinates.lat, coordinates.long)
+    weather = WeatherService.find_forecast_for_location(coordinates.lat, coordinates.lng)
     Forecast.new(weather)
   end
 
@@ -14,6 +14,6 @@ class ForecastFacade
     return true if params[:location].nil?
 
     city, state = params[:location].split(',')
-    params[:location] == '' || city.nil? || state.nil?
+    params[:location] == '' || city.blank? || state.blank?
   end
 end
